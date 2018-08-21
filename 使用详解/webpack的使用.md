@@ -91,3 +91,5 @@ webpack的初级使用
             }
 之后创建es6语法规范的文件,在app.js中引用<br>
 `import {fn} from './es5.js';`即可把文件转为es5格式
+#####配置简单命令:<br>
+在`package.json`文件中的scripts中,修改命令
