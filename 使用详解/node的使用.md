@@ -85,3 +85,46 @@ npm login | 登录
 	//   base: 'file.txt',
 	//   ext: '.txt',
 	//   name: 'file' }
+
+####url与querystring的使用:<br>
+
+	const {URL} = require('url');
+	const myUrl = new URL('https://user:pass@sub.host.com:8080/p/a/t/h?query=string#hash');
+	const qs = require('querystring');
+	console.log(qs.parse(myUrl));
+
+####crypto加密:<br>
+
+	const crypto = require('crypto');
+	
+	const script = 'abcdefg';
+	const hash = crypto.createHmac('md5' , secret).update("asd").digest("hex");
+
+####fs数据:<br>
+const fs = require('fs');
+
+	fs.unlink('/tmp/hello', (err) => {
+	  if (err) throw err;
+	  console.log('成功删除 /tmp/hello');
+	});
+	fs.rename('/tmp/hello', '/tmp/world', (err) => {
+	  if (err) throw err;
+	  console.log('重命名完成');
+	});
+	fs.stat('/tmp/world', (err, stats) => {
+	  if (err) throw err;
+	  console.log(`文件属性: ${JSON.stringify(stats)}`);
+	});
+
+	fs.open('myfile', 'wx', (err, fd) => {
+	  if (err) {
+	    if (err.code === 'EEXIST') {
+	      console.error('myfile already exists');
+	      return;
+	    }
+	
+	    throw err;
+	  }
+	
+	  writeMyData(fd);
+	});

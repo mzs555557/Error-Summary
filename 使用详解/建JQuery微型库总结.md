@@ -33,6 +33,20 @@ id | /^#/.test(obj)
 css3 | /^[~+>\s]/
 标签选择器| /^[\w]/
 
+	let reg = /^[a-z]{5,17}$/ig;//正则表达全局匹配成功时会记录匹配下标
+	let str1 = "asdasdsadadasd";
+	let str2 = "asdasdsfsgfgdf";
+	let str3 = "asdsdghfghfggj";
+	let str4 = "ddslkjdlsfdlkjg";
+	
+	console.log(reg.test(str1))//true
+	//匹配成功,记录lastIndex 
+	console.log(reg.test(str1))//false
+	//匹配失败,重置lastIndex = 0;
+	console.log(reg.test(str1))//true
+	console.log(reg.test(str1))//flase
+	//去除/g之后则全部为true
+
 ####1.2.3window.scrollBy<br>
 
 在窗口中按指定的偏移量滚动文档<br>
@@ -103,3 +117,38 @@ css3 | /^[~+>\s]/
 
 `arr.shift()`删除并返回数组的第一个元素<br>
 
+###1.4内部方法:<br>
+
+#####1.4.1用于处理事件修饰符/事件指令<br>
+
+	let _eventModifiers = function (arr , e) {
+		arr.foreach((v)=>{
+			if(v === "stop") {
+				if(e.stopPropagation){
+					e.stopPropagation();
+				}else{
+					e.cancelBubble = true;
+				}		
+			} else if (v === "prevent") {
+				if(e.preventDefault) {
+					e.preventDefault();
+				}else{
+					e.returnValue = false;
+				}
+			}	
+		})
+	}
+
+#####1.4.2内部方法,用于储存事件函数
+
+	let _addEventFn = function(obj){
+		if(typeof obj.dom.events === "undefined") {
+			obj.dom.events = {};
+			obj.dom.events[obj.type] = [obj.fn];
+		}else if(obj.dom.events[obj.type] instanceof Array) {
+			obj.dom.events[obj.type].push(obj.fn);
+		}else {
+			obj.dom.events[obj.type] = [obj.fn];
+		}
+		obj.dom.events[obj.type].origin = obj.origin;
+	}
