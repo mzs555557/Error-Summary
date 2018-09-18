@@ -236,3 +236,12 @@ const fs = require('fs');
 	}).catch(error=>{
 	    console.log(error);
 	});
+
+####利用nodejs建立博客管理系统:
+
+模板 | pug
+--   | --
+数据库 | MongoDB
+ 后台 | nodejs
+模仿 | layui界面
+
