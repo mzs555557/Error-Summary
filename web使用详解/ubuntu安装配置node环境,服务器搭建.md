@@ -25,4 +25,18 @@ linux:
 - `vi ~/.bash_profile`配置
 - 在其中添加`PATH=$PATH:/usr/local/mongodb/bin`(路径)
 - `source ~/.bash_profile`配置
-	
+
+###服务器搭建<br>
+- `cd /var`进入本地文件夹
+- `mkdir mongodb` 
+- `cd mongodb`创建并进入mongodb文件夹
+- `mkdir db`创建存放的数据库
+- 使用ftp将blog文件上传至`/var`
+- `mongod --dbpath /var/mongodb/db --fork --logpath /var/mongodb/log/log`启动常驻数据库MongoDB
+- `kill {forked process:中的值}`终止MongoDB程序
+- 或者
+	- `mongo` 
+	- `use admin`
+	- `db.shutdownServer()`终止mongo程序
+- 进入blog , `pm2 start app.js`启动项目
+- `pm2 stop id值`终止
