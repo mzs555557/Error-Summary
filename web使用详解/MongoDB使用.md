@@ -28,4 +28,4 @@ $lt | less than  <
 $lte | lt equal  <=
 $ne | not equal  !=
 $eq |  equal  =
-
+`mongoimport --db table --collection collectionName --file name.json`|`mongodb导入json文件`
