@@ -209,3 +209,78 @@
 	const query = Url.parse(this.props.location.search , true).query
 	
 ```
+####在create-react-app中引用组件需配置样式
+#####使用`antd-mobile`组件时在package.json修改以下配置在可以引入样式
+```js
+	"babel":{
+	++ "plugins":{
+			["import", { libraryName: "antd-mobile", "style": "css" }]
+        }	
+	}	
+
+```
+
+####页面路由的控制
+```js
+<Router basename='router'>
+            <Switch>
+                <Route path='/' render ={()=>{
+                  return (
+                    <Switch>
+                        {
+                          routes.map((item , index) => {
+                            if(item.exact) {
+                              return (
+                                <Route
+                                    key={index}
+                                    exact ={item.exact}
+                                    path = {item.path}
+                                    component = {item.component}                                
+                                >
+                                </Route>
+                              )
+                            }
+                            return (
+                              <Route
+                                key = {index}
+                                path = {item.path}
+                                render= {()=>{
+                                  return < item.component abc={'123'} />
+                                }}>
+                                </Route>
+                            )
+                          })
+                        }
+                    </Switch>
+                  )
+                }}>
+
+                </Route>
+            </Switch>
+          </Router>
+```
+
+
+#####关于npm端口占用报错:
+`netstat -aon|findstr
+"3000"`
+
+`taskkill /pid number -f`
+
+###react首次创建至渲染页面
+	constructor（）    构造函数，在创建组件的时候调用一次
+	componentWillmount（）    在组件即将被挂载的时候调用一次 
+    组件还没有渲染出来，但js逻辑已经开始执行了 一般异步的方法（ajax）请求数据
+	render（）    渲染
+	componentDidMount（）    在组件被挂载完成的时候调用一次，可以在这里使用 refs
+    组件已经被渲染出来了
+
+
+	omponentWillReceiveProps(nextProps)    父组件的更新会触发子组件的这个函数
+    nextProps 父组件更新的时候带来的数据
+	shouldComponentUpdate(nextProps,nextState)
+    是否需要重新渲染
+    return false/true
+	componentWillUpdate(nextProps,nextState)    即将更新
+	render    渲染
+	componentDidUpdate()    完成更新
