@@ -12,7 +12,7 @@
 			
 		}
 		MyFunction(){
-			this.context.router.history.push('/#');	//实现页面的跳转
+			this.context.router.history.push('/#');	//实现页面的跳转  注意this
 		}
 	}	
 	
@@ -269,18 +269,54 @@
 
 ###react首次创建至渲染页面
 	constructor（）    构造函数，在创建组件的时候调用一次
-	componentWillmount（）    在组件即将被挂载的时候调用一次 
-    组件还没有渲染出来，但js逻辑已经开始执行了 一般异步的方法（ajax）请求数据
-	render（）    渲染
-	componentDidMount（）    在组件被挂载完成的时候调用一次，可以在这里使用 refs
-    组件已经被渲染出来了
+	componentWillMount(){
+		console.log("组件即将挂载")
+	}
+	componentDidMount(){
+		console.log("组件已经挂载")
+	}
+	componentWillReceiveProps(nextProps){
+		console.log("组件要接受父组件的值")		
+	}
+	shouldComponentUpdate(){
+		console.log("判断是否要更新组件")
+	}
+	componentWillUpdate(){
+		console.log("马上要更新组件了")
+	}
+	componentDidUpdate(){
+		console.log("组件更新完毕")
+	}
+	componentWillUnmount(){
+		console.log("组件卸载了")
+	}
+
+####关于redux的基本使用<br>
+	
+	import {createStore} from 'redux';
+	    function counter(state = 0, action){
+	      switch(action.type){
+	        case '加机关枪':
+	          return state + 1;
+	        case '减机关枪':
+	          return state - 1;
+	        default:
+	          return 10;
+	      }
+	    }
+	    const store = createStore(counter);
+	    const init = store.getState()
+	
+	    console.log(init);
+	
+	    function listener(){
+	       const current = store.getState();
+	       console.log(`现有机关枪${current}把`); 
+	    }
+	    store.subscribe(listener);
+	    store.dispatch({type:'加机关枪'})
+	    store.dispatch({type:'加机关枪'})
+	    console.log(store.getState());
+	    store.dispatch({type:'减机关枪'})
 
 
-	omponentWillReceiveProps(nextProps)    父组件的更新会触发子组件的这个函数
-    nextProps 父组件更新的时候带来的数据
-	shouldComponentUpdate(nextProps,nextState)
-    是否需要重新渲染
-    return false/true
-	componentWillUpdate(nextProps,nextState)    即将更新
-	render    渲染
-	componentDidUpdate()    完成更新
