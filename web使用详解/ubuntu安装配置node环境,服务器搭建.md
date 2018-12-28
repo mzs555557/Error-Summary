@@ -40,3 +40,41 @@ linux:
 	- `db.shutdownServer()`终止mongo程序
 - 进入blog , `pm2 start app.js`启动项目
 - `pm2 stop id值`终止
+
+
+
+
+
+####vps的搭建
+
+```
+wget --no-check-certificate -O shadowsocks.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks.sh
+
+chmod +x shadowsocks.sh
+./shadowsocks.sh 2>&1 | tee shadowsocks.log
+```
+
+配置ss以后  通过 shadowsocks 搭建vpn 
+
+
+
+
+####java配置<br>
+  - mkdir /usr/local/java/
+  - tar -zxvf jdk-8u171-linux-x64.tar.gz -C /usr/local/java/
+  - vim /etc/profile
+  - export JAVA_HOME=/usr/local/java/jdk1.8.0_171
+export JRE_HOME=${JAVA_HOME}/jre
+export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
+export PATH=${JAVA_HOME}/bin:$PATH
+  - source /etc/profile
+  - ln -s /usr/local/java/jdk1.8.0_171/bin/java /usr/bin/java
+
+####tomcat配置<br>
+  -  echo "export CATALINA_HOME="/usr/local/tomcat9"" >> ~/.bashrc
+  -  source ~/.bashrc
+
+####解决linux乱码
+  -  jdbc:mysql://localhost:3306/test?&amp;useUnicode=true&amp;characterEncoding=gbk
+&amp;autoReconnect=true&amp;failOverReadOnly=false
+

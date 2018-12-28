@@ -320,3 +320,7 @@
 	    store.dispatch({type:'减机关枪'})
 
 
+
+####react 组件传值的步骤:
+
+
