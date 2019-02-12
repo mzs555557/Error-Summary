@@ -54,3 +54,46 @@ let p = new Proxy(target , handler);
 ```
 
 #####memary cache内存中的缓存 && disk cache 硬盘的缓存
+
+###Symbol()的使用
+- ####每个Symbol值都是唯一的,因此该值不与其他任何值相等
+ 
+```
+let symbol1 = Symbol();
+let symbol2 = Symbol();
+
+console.log( symbol1 === symbol2); 
+>false
+```
+- ####Symbol值不能与其它类型的值进行运算,会报错,Symbol可以显式转为字符串,也可以转为布尔值
+
+```
+let sym = Symbol('My symbol');
+
+"your symbol is " + sym
+//TypeError: can't convert symbol to string
+`your symbol is ${sym}`
+//TypeError: can't convert symbol to string
+```
+###作为属性名的symbol
+
+- ####由于每个symbol的值都不相等,意味着Symbol值可以作为标识符
+
+```
+let mySymbol = Symbol();
+
+//first write methods
+let a = {};
+a[mySymbol] = 'Hello!';
+//second
+let a = {
+    [mySymbol]: 'Hello!'
+};
+//third
+let a = {};
+Object.definProperty(a , mySymbol, { value: 'Hello'});
+
+// 以上写法的结果相同
+a[mySymbol] //"Hello!"
+```
+
