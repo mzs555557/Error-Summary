@@ -237,6 +237,17 @@ const fs = require('fs');
 	    console.log(error);
 	});
 
+#### express的使用 
+```
+const bodyParser = require('body-parser'),
+//获取post参数
+app.use(bodyParser.urlencoded({ extended: false }));
+// parse application/json
+app.use(bodyParser.json());
+//使用此语句调用req
+```
+####mongoose数据库更新必须有回调函数
+
 ####利用nodejs建立博客管理系统:
 
 模板 | pug
