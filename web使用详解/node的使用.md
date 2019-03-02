@@ -250,6 +250,29 @@ app.use(bodyParser.json());
 
 ####利用nodejs建立博客管理系统:
 
+####mongoose的连表查询&&连表删除&&数组的删除操作
+```
+const persionSchema = Schema({
+	_id: Schema.Types.ObjectId,
+	name: String,
+	age: Number,
+	stories:[{type:Schema.Types.ObjectId , ref: 'Story'}] 
+});
+const storySchema = Schema({
+	author:{type:Schema.Types.ObjectId , ref : 'Person'},
+	title:String,
+	fans:[{type:Schema.Types.ObjectId , ref:'Person'}]
+});
+
+story.findOne({}).populate('author');
+
+
+user.updateMany(
+            {$or: [{'task.publish': _id}, {'task.accomplish': _id}, {'task.receive': _id}]},
+            {$pull: {'task.publish': _id, 'task.accomplish': _id, 'task.receive': _id}}
+        );
+```
+
 模板 | pug
 --   | --
 数据库 | MongoDB
