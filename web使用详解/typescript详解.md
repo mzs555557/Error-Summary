@@ -100,4 +100,20 @@ Class Web extends Person{
 var w = new Web('123');
 
 //类的三种修饰符 public protected private
+
+//多态
+```
+####typescript中的接口
+```
+interface Config{
+	method: string;
+	url: string;
+	data?: string;
+	dataType: string;
+}//规定所传数据的数据类型
+
+interface Method{
+	(key:string , value:string):string
+}//规定所传函数数据的类型与返回参数
+
 ```
