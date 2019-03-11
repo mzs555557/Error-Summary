@@ -93,7 +93,7 @@ p.setName('vhsj');
 p.getName();//vhsj
 
 Class Web extends Person{
-	constructor(name:string){
+	constructor(name:string){s
 		super(name);
 	}
 }
