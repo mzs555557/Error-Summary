@@ -145,4 +145,77 @@ Object.definProperty(a , mySymbol, { value: 'Hello'});
 // 以上写法的结果相同
 a[mySymbol] //"Hello!"
 ```
+###Symbol属性名的遍历
+```
+Symbol作为属性名,不会出现在for .. in , for ... of 循环中, 也不会被Object.keys() , Object.getOwnPropertyNames() , JSON.stringify()返回
+但Object.getOwnPropertySymbols(obj);方法返回一个数组,成员是当前对象的所有用作属性名的Symbol值
+----
+const obj = {};
+let a = Symbol('a');
+let b = Symbol('b');
 
+obj[a] = 'Hello';
+obj[b] = 'World';
+
+const objectSymbols = Object.getOwnPropertySymbols(obj);
+
+objectSymbols//[Symbol(a) , Symbol(b)]
+---- Reflect.ownKeys方法可以返回所有类型的键名 包括常规键名 与 Symbol键名 
+let obj = {
+	[Symbol('my_key')]:1,
+	enum:2,
+	nonEnum:3
+}
+
+Reflect.ownKeys(obj);
+----由于以Symbol值作为名称的属性不会被常规方法遍历得到,可以为对象定义一些非私有的,用于内部的方法
+
+let size = Symbol('size');
+
+class Collection{
+	constructor(){
+		this[size] = 0;
+	}
+	add(item){
+		this[this[size]] = item;
+		this[size] ++;
+	}
+	static sizeof(instance) {
+		return instance[size]
+	} 
+}
+let x = new Collection();
+Collection.sizeof(x)
+
+x.add('foo');
+Collection.sizeOf(x);
+
+Object.keys(x) // ['0']
+Object.getOwnPropertyNames(x)//['0']
+Objec.getOwnPropertySymbols(x) // [Symbol(size)]
+
+```
+###Symbol.for() , Symbol.keyFor()
+```
+Symbol.for() 与 Symbol() 都会生成新的 Symbol 前者会被登记在全局供搜索,后者不会
+----
+Symbol.for("bar") === Symbol.for("bar")
+// true
+
+Symbol("bar") === Symbol("bar")
+// false
+----
+Symbol.keyFor方法返回一个已登记的Symbol类型值的key
+----
+let s1 = Symbol.for("foo");
+Symbol.keyFor(s1) // "foo"
+
+let s2 = Symbol("foo");
+Symbol.keyFor(s2) // undefined
+
+```
+
+###模块的Singleton模式
+```
+
+```
