@@ -324,3 +324,26 @@
 ####react 组件传值的步骤:
 
 
+
+####redux 使用
+ - 在package.json的babel添加"plugins"内容 如下
+ 
+```
+"babel": {
+		"presets": [
+			"react-app"
+		],
+		"plugins": [
+			[
+				"@babel/plugin-proposal-decorators",
+				{
+					"legacy": true
+				}
+			]
+		]
+	}
+
+
+```
+ - 运行 npm run eject 进行webpack的配置
+ - 之后使用@connect进行redux的配置

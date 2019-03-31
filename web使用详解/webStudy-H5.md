@@ -17,7 +17,51 @@ atob|解析成我们能够识别的数据
 --|--
 btoa| 编译成计算识别的编码
 
+####防抖与节流
+```
+ window.onload = function(){
+            var myDebounce = document.getElementById("debounce");
+            var myThrottle = document.getElementById("throttle");
+            myDebounce.addEventListener("click" ,  debounce(sayDebounce));
+            myThrottle.addEventListener("click" , throttle(sayThrottle));
+        }
+        //防抖功能的函数
+        function debounce(fn){
+            let timeout = null;
+            return function(){
+                clearTimeout(timeout);
 
+                timeout = setTimeout(()=>{
+                    fn.call(this , arguments);
+                } , 1000);
+            }
+        }
+        function sayDebounce(){
+            console.log("防抖成功!!");
+        }
+        ///节流功能的函数
+        function throttle(fn) {
+            let canRun = true;
+            return function(){
+                if(!canRun){
+                    return;
+                }
+                canRun = false;
+                setTimeout(()=>{
+                    fn.call(this , arguments);
+                    canRun = true;
+                } , 1000)
+            }
+        }
+        function sayThrottle(){
+            console.log("节流成功");
+        }
+
+```
+####重绘与回流
+```
+
+```
 ####Proxy()
 ```
 let p = new Proxy(target , handler);
@@ -216,6 +260,51 @@ Symbol.keyFor(s2) // undefined
 ```
 
 ###模块的Singleton模式
+- Singleton 模式指的是调用一个类,任何时候返回同一实例
+
+```
+function A(){
+  this.foo = 'hello';
+}
+
+if(!global._foo){
+  global._foo = new A();
+}
+module.exports = global._foo;
+```
+- 引入上面的代码时 , a任何时候加载都是A的同一个实例, 但是全局变量global._foo 是可以改写的,任何文件都可以修改
+
+```
+global._foo = {foo : 'world'}; // 修改了变量
+const a = require('./mod.js');
+console.log(a.foo);
+```
+- 可以保证 global[FOO_KEY]不会被无意间覆盖 , 但仍可改写
+
+```
+const FOO_KEY = Symbol.for('foo');
+
+function A() {
+  this.foo = 'hello';
+}
+
+if(!global[FOO_KEY]) {
+  global[FOO_KEY] = new A();
+}
+
+module.exports = global[FOO_KEY];
 ```
 
 ```
+global[Symbol.for('foo')] = {foo :'world !'};
+
+```
+
+- 如果键名使用Symbol方法生成 , 那么外部将无法引用这个值 , 也无法改写
+
+```
+const FOO_KEY = Symbol('foo');
+
+```
+
+
