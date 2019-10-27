@@ -1,7 +1,9 @@
-####kali使用:<br>
- - #####添加更新源<br>
- 	`leafpad /etc/apt/sources.list`<br>
+#### kali使用:<br>
+
+ - ##### 添加更新源 
+	 	`leafpad /etc/apt/sources.list `   <br>
 	打开更新源配置文件,将下面的更新源复制到原内容的前面:
+	
 	```
 		#163网易 Kali源
 	deb http://mirrors.163.com/debian wheezy main non-free contrib 
@@ -35,14 +37,17 @@
 	#官方Kali源
 	#deb http://http.kali.org/kali kali-rolling main non-free contrib
 	#deb-src http://http.kali.org/kali kali-rolling main non-free contrib
-	```	
+	```
  - 更新系统
  	- `apt-get update`
  - 安装fcitx
+	
 	- apt-get install fcitx
  - 安装Google拼音输入法
+   
    - apt-get install fcitx-googlepinyin
  - 重启系统 
+   
    - `reboot	`	
 
 

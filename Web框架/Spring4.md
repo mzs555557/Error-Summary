@@ -1,4 +1,5 @@
-###bean的配置
+### bean的配置
+
 ```
 <bean id="aa" class="bb">
 	//通过属性赋值
@@ -54,7 +55,7 @@ beanName: IOC 容器配置的bean的名字
 
 ```
 
-####SpringAop
+#### SpringAop
  - #####SpringAop中放入jar包
  - #####在配置文件中加入 aop 的命名空间
  - #####在配置文件中加入以下的配置

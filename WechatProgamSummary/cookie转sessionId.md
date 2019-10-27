@@ -1,4 +1,5 @@
-###由于小程序不支持cookie
+### 由于小程序不支持cookie
+
 ```js
 	wx.request({
       url: 'http://47.106.221.157:8080/doLogin?userName=20177720165&password=123456',
@@ -21,3 +22,4 @@
       }	
 
 ```
+

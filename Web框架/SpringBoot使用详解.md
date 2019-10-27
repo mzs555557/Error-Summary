@@ -1,4 +1,5 @@
-####Spring端口的设置及页面路由的设置
+#### Spring端口的设置及页面路由的设置
+
 ```
 application.properties
 
@@ -8,7 +9,8 @@ server.servlet.context-path = /test //规定启动路由
 
 ```
 
-####Spring的路由设置
+#### Spring的路由设置
+
 ```
 @Component
 @ConfigurationProperties(prefix = "boot")
@@ -76,7 +78,8 @@ public class ConfiginfoController {
 }
 ```
 
-####MVCController
+#### MVCController
+
 ```
 @RestController
 public class MVCController {
@@ -106,7 +109,7 @@ public class MVCController {
 
 ```
 
-####jsp在Spring中的配置
+#### jsp在Spring中的配置
 
 ```
 
