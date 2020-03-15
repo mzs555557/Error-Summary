@@ -263,7 +263,8 @@ Symbol.keyFor(s2) // undefined
 
 ```
 
-###模块的Singleton模式
+### 模块的Singleton模式
+
 - Singleton 模式指的是调用一个类,任何时候返回同一实例
 
 ```
